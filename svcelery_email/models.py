@@ -5,6 +5,9 @@ class Blacklist(models.Model):
     email = models.EmailField(db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __unicode__(self):
+        return self.email
+
 
 RESULT_CODES = (
     ("1", "success"),
@@ -24,3 +27,6 @@ class MessageLog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     objects = MessageLogManager()
+
+    def __unicode__(self):
+        return self.email
