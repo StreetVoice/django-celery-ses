@@ -17,7 +17,7 @@ RESULT_CODES = (
 
 class MessageLogManager(models.Manager):
     def log(self, message, result_code):
-        self.create(email=message.to, body=message.message(), result=result_code)
+        self.create(email=message.to[0], body=message.message(), result=result_code)
         
 
 class MessageLog(models.Model):
