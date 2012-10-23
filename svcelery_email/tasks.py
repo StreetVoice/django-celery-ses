@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core.mail import get_connection
-from djcelery_email.models import Blacklist
+from svcelery_email.models import Blacklist, MessageLog
 from smtplib import SMTPDataError
 from celery.task import task
 
@@ -32,6 +32,6 @@ def send_email(message, **kwargs):
         logger.warning("Failed to send email message to %r, retrying.", message.to)
         send_email.retry(exc=e)
 
-    MessageLog()
+    MessageLog.objects.log(message)
 
     conn.close()

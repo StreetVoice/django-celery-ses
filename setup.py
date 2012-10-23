@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-from djcelery_email import __version__
+from svcelery_email import __version__
 
 
 setup(

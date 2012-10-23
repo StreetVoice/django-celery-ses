@@ -1,5 +1,5 @@
 from django.core.mail.backends.base import BaseEmailBackend
-from djcelery_email.tasks import send_email
+from svcelery_email.tasks import send_email
 
 class CeleryEmailBackend(BaseEmailBackend):
     def __init__(self, fail_silently=False, **kwargs):
