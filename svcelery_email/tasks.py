@@ -23,15 +23,16 @@ def send_email(message, **kwargs):
     try:
         result = conn.send_messages([message])
         logger.debug("Successfully sent email message to %r.", message.to)
+        MessageLog.objects.log(message, 1)
         return result
     except SMTPDataError, e:
-        logger.warning("message to %r, blacklisted.", message.to)
+        logger.warning("Message to %r, blacklisted.", message.to)
         if e.smtp_code == 554:
+            MessageLog.objects.log(message, 3)
             Blacklist(email=message.to).save()
     except Exception, e:
+        MessageLog.objects.log(message, 2)
         logger.warning("Failed to send email message to %r, retrying.", message.to)
         send_email.retry(exc=e)
-
-    MessageLog.objects.log(message)
 
     conn.close()
