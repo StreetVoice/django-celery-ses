@@ -14,7 +14,7 @@ def send_email(message, **kwargs):
 
     # check blacklist
     try:
-        Blacklist.objects.get(email=message.to)
+        Blacklist.objects.get(email=message.to[0])
         logger.debug("Email already in blacklist.")
     except Blacklist.DoesNotExist:
         pass
@@ -29,7 +29,7 @@ def send_email(message, **kwargs):
         logger.warning("Message to %r, blacklisted.", message.to)
         if e.smtp_code == 554:
             MessageLog.objects.log(message, 3)
-            Blacklist(email=message.to).save()
+            Blacklist(email=message.to[0]).save()
     except Exception, e:
         MessageLog.objects.log(message, 2)
         logger.warning("Failed to send email message to %r, retrying.", message.to)
