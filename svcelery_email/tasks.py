@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db import IntegrityError
 from django.core.mail import get_connection
 from svcelery_email.models import Blacklist, MessageLog
 from smtplib import SMTPDataError
@@ -29,7 +30,10 @@ def send_email(message, **kwargs):
         logger.warning("Message to %r, blacklisted.", message.to)
         if e.smtp_code == 554:
             MessageLog.objects.log(message, 3)
-            Blacklist(email=message.to[0]).save()
+            try:
+                Blacklist(email=message.to[0]).save()
+            except IntegrityError:
+                pass
     except Exception, e:
         MessageLog.objects.log(message, 2)
         logger.warning("Failed to send email message to %r, retrying.", message.to)
