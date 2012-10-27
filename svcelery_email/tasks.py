@@ -5,10 +5,17 @@ from svcelery_email.models import Blacklist, MessageLog
 from smtplib import SMTPDataError
 from celery.task import task
 
+CONFIG = getattr(settings, 'CELERY_EMAIL_TASK_CONFIG', {})
 BACKEND = getattr(settings, 'CELERY_EMAIL_BACKEND',
                   'django.core.mail.backends.smtp.EmailBackend')
 
-@task(ignore_result=True)
+TASK_CONFIG = {
+    'name': 'djcelery_email_send',
+    'ignore_result': True,
+}
+TASK_CONFIG.update(CONFIG)
+
+@task(**TASK_CONFIG)
 def send_email(message, **kwargs):
     logger = send_email.get_logger()
     conn = get_connection(backend=BACKEND)
