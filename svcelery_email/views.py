@@ -3,11 +3,13 @@
 from django.http import HttpResponse
 from django.utils import simplejson
 from django.utils.simplejson import JSONDecodeError
+from django.views.decorators.csrf import csrf_exempt
 
 from svcelery_email.models import Blacklist
 
 
-def sns_feedback(request):
+@csrf_exempt
+def sns_notification(request):
     """
     Receive AWS SES bounce SNS notification
     """
