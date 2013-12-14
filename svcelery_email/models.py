@@ -3,6 +3,7 @@ from django.db import models
 
 class Blacklist(models.Model):
     email = models.EmailField(unique=True)
+    type = models.PositiveSmallIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):

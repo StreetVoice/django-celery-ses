@@ -1,9 +1,13 @@
+from smtplib import SMTPDataError
+
 from django.conf import settings
 from django.db import IntegrityError
 from django.core.mail import get_connection
-from svcelery_email.models import Blacklist, MessageLog
-from smtplib import SMTPDataError
+
 from celery.task import task
+
+from svcelery_email.models import Blacklist, MessageLog
+
 
 CONFIG = getattr(settings, 'CELERY_EMAIL_TASK_CONFIG', {})
 BACKEND = getattr(settings, 'CELERY_EMAIL_BACKEND',
