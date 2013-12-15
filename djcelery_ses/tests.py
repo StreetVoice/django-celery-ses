@@ -63,3 +63,13 @@ class SNSNotificationTest(TestCase):
         self.assertEqual(resp.content, 'Invalid JSON')
         self.assertEqual(resp.status_code, 400)
 
+
+    def test_subscription(self):
+        PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
+        FIXTURE_DIRS = os.path.join(PROJECT_ROOT, 'fixtures')
+
+        with open(os.path.join(FIXTURE_DIRS, 'subscription.json')) as f:
+            content = f.read()
+
+        self.client.post('/sns_notification/', content, content_type="application/json")
+
