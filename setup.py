@@ -17,6 +17,7 @@ setup(
     author_email='tzangms@streetvoice.com',
     url='http://github.com/StreetVoice/django-celery-ses',
     license='MIT',
+    test_suite='runtests.runtests',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,

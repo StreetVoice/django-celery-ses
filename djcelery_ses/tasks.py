@@ -6,7 +6,7 @@ from django.core.mail import get_connection
 
 from celery.task import task
 
-from svcelery_email.models import Blacklist, MessageLog
+from .models import Blacklist, MessageLog
 
 
 CONFIG = getattr(settings, 'CELERY_EMAIL_TASK_CONFIG', {})
@@ -19,18 +19,27 @@ TASK_CONFIG = {
 }
 TASK_CONFIG.update(CONFIG)
 
+
 @task(**TASK_CONFIG)
 def send_email(message, **kwargs):
+    """
+    send mail task
+    """
+
     logger = send_email.get_logger()
     conn = get_connection(backend=BACKEND)
 
     # check blacklist
-    try:
-        Blacklist.objects.get(email=message.to[0], type=0)
-        logger.debug("Email already in blacklist.")
-        return
-    except Blacklist.DoesNotExist:
-        pass
+    CHECK_BLACKLIST = getattr(settings, 'DJCELERY_SES_CHECK_BLACKLIST', True)
+    if CHECK_BLACKLIST:
+        logger.debug('Check blacklist')
+
+        try:
+            Blacklist.objects.get(email=message.to[0], type=0)
+            logger.debug("Email already in blacklist.")
+            return
+        except Blacklist.DoesNotExist:
+            pass
 
     # send
     try:

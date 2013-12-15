@@ -1,6 +1,6 @@
 from django.core.mail.backends.base import BaseEmailBackend
 
-from svcelery_email.tasks import send_email
+from .tasks import send_email
 
 
 class CeleryEmailBackend(BaseEmailBackend):

@@ -1,9 +1,11 @@
 from django.contrib import admin
-from svcelery_email.models import Blacklist, MessageLog
+from .models import Blacklist, MessageLog
 
 class BlacklistAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('email', 'type', 'created_at')
+    list_filter = ('type',)
 admin.site.register(Blacklist, BlacklistAdmin)
+
 
 class MessageLogAdmin(admin.ModelAdmin):
     list_display = ('email', 'result', 'created_at')

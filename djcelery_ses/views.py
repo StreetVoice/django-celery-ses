@@ -1,11 +1,10 @@
 # coding: utf-8
+import json
 
 from django.http import HttpResponse
-from django.utils import simplejson
-from django.utils.simplejson import JSONDecodeError
 from django.views.decorators.csrf import csrf_exempt
 
-from svcelery_email.models import Blacklist
+from .models import Blacklist
 
 
 @csrf_exempt
@@ -16,13 +15,12 @@ def sns_notification(request):
 
     # decode json
     try:
-        json = request.raw_post_data
-        data = simplejson.loads(json)
-    except JSONDecodeError:
+        data = json.loads(request.raw_post_data)
+    except json.JSONDecodeError:
         return HttpResponse('Oops')
 
     try:
-        message = simplejson.loads(data['Message'])
+        message = json.loads(data['Message'])
     except ValueError:
         assert False, request.raw_post_data
 

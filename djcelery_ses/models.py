@@ -2,8 +2,12 @@ from django.db import models
 
 
 class Blacklist(models.Model):
+    TYPE_CHOICES = (
+        (0, 'Bounce'),
+        (1, 'Complaints'),
+    )
     email = models.EmailField(unique=True)
-    type = models.PositiveSmallIntegerField(default=0)
+    type = models.PositiveSmallIntegerField(default=0, choices=TYPE_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):

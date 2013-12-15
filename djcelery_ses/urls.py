@@ -1,5 +1,5 @@
-from django.conf.urls.defaults import url, patterns
+from django.conf.urls import url, patterns
 
-urlpatterns = patterns('svcelery_email.views',
+urlpatterns = patterns('djcelery_ses.views',
     url(r'^sns_notification/$', 'sns_notification'),
 )
