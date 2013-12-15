@@ -1,5 +1,4 @@
 import os.path
-import json
 
 from django.test import TestCase
 from django.core import mail
