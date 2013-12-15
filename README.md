@@ -1,7 +1,7 @@
 Django Celery SES
 =========================
 
-[![PyPI Version](https://badge.fury.io/py/iloveck101.png)](https://pypi.python.org/pypi/iloveck101)
+[![PyPI Version](https://badge.fury.io/py/django-celery-ses.png)](https://pypi.python.org/pypi/django-celery-ses)
 [![Build Status](https://travis-ci.org/StreetVoice/django-celery-ses.png?branch=master)](https://travis-ci.org/StreetVoice/django-celery-ses)
 [![Coverage Status](https://coveralls.io/repos/StreetVoice/django-celery-ses/badge.png?branch=master)](https://coveralls.io/r/StreetVoice/django-celery-ses?branch=master)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/StreetVoice/django-celery-ses/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
