@@ -26,7 +26,7 @@ def send_email(message, **kwargs):
 
     # check blacklist
     try:
-        Blacklist.objects.get(email=message.to[0])
+        Blacklist.objects.get(email=message.to[0], type=0)
         logger.debug("Email already in blacklist.")
         return
     except Blacklist.DoesNotExist:
