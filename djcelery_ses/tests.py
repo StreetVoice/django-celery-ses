@@ -1,6 +1,7 @@
+import os.path
+
 from django.test import TestCase
 from django.core import mail
-from django.conf import settings
 from django.core.mail import EmailMessage
 from django.test.utils import override_settings
 
@@ -41,3 +42,18 @@ class DjcelerySESTest(TestCase):
 
         # should be no email in outbox
         self.assertEqual(len(mail.outbox), 1)
+
+
+class SNSNotificationTest(TestCase):
+    urls = 'djcelery_ses.urls'
+
+    def test_notification(self):
+        PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
+        FIXTURE_DIRS = os.path.join(PROJECT_ROOT, 'fixtures')
+
+        with open(os.path.join(FIXTURE_DIRS, 'sns.json')) as f:
+            content = f.read()
+
+        self.client.post('/sns_notification/', content, content_type="application/json")
+
+        self.assertEqual(Blacklist.objects.count(), 1)

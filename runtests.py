@@ -24,8 +24,9 @@ settings.configure(
     ],
     SITE_ID=1,
     DEBUG=False,
+    ROOT_URLCONF='',
     CELERY_EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend',
-    TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
+    TEST_RUNNER='djcelery.contrib.test_runner.CeleryTestSuiteRunner',
 )
 
 

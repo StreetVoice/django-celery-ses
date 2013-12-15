@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "8q787fm3-f7fe-5sf4-863e-331bre627f24",
+  "TopicArn" : "arn:aws:sns:us-east-1:1234567890:ses-bounces-topic",
+  "Message" : "{\"notificationType\":\"Bounce\",\"bounce\":{\"reportingMTA\":\"dns; a193-136.smtp-out.amazonses.com\",\"bounceType\":\"Transient\",\"bouncedRecipients\":[{\"emailAddress\":\"email@example.com\",\"status\":\"5.0.0\",\"diagnosticCode\":\"smtp; 5.3.0 - Other mail system problem 571-'5.7.1 Message contains spam or virus or sender is blocked : 17624:1603463706|734463C' (delivery attempts: 0)\",\"action\":\"failed\"}],\"bounceSubType\":\"General\",\"timestamp\":\"2013-03-11T22:15:21.000Z\",\"feedbackId\":\"0000013d5b854265-18f16a12-8a99-11e2-aa8d-81a75f1af476-000000\"},\"mail\":{\"timestamp\":\"2013-03-11T22:14:51.000Z\",\"source\":\"otheremail@example.com\",\"messageId\":\"0000013d5b853e2a-820173e1-095e-4h91-9c91-03876f970534-000000\",\"destination\":[\"email@example.com\"]}}",
+  "Timestamp" : "2013-03-11T22:14:52.935Z",
+  "SignatureVersion" : "1",
+  "Signature" : "bY5gjFMgrVnK+4Qw867qHR0cLDXlgZmYb6EdiDAd4hNHMDab4J5MdldldEQwkSFslkdkDsdowlsKAdQvZ9HZwSmEcTRpwgg3Fpp5R/efVnTdUVfJkmBcnhijhWHpxSdEqN9m5vgPhg=",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-f3ecfb7224c72n3fe7bp5KDMMX6de32f.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:1234567890:ses-bounces-topic:73m9983aa-0f4b-4r87-a5d7-d43pb99c91af"
+}
