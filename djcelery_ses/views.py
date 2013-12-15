@@ -1,7 +1,7 @@
 # coding: utf-8
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Blacklist
@@ -16,8 +16,8 @@ def sns_notification(request):
     # decode json
     try:
         data = json.loads(request.raw_post_data)
-    except json.JSONDecodeError:
-        return HttpResponse('Oops')
+    except ValueError:
+        return HttpResponseBadRequest('Invalid JSON')
 
     try:
         message = json.loads(data['Message'])

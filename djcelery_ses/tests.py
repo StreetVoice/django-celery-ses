@@ -1,4 +1,5 @@
 import os.path
+import json
 
 from django.test import TestCase
 from django.core import mail
@@ -57,3 +58,9 @@ class SNSNotificationTest(TestCase):
         self.client.post('/sns_notification/', content, content_type="application/json")
 
         self.assertEqual(Blacklist.objects.count(), 1)
+
+    def test_error_notification(self):
+        resp = self.client.post('/sns_notification/', 'hello', content_type="application/json")
+        self.assertEqual(resp.content, 'Invalid JSON')
+        self.assertEqual(resp.status_code, 400)
+
