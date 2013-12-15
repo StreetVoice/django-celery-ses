@@ -15,7 +15,7 @@ def sns_notification(request):
 
     # decode json
     try:
-        data = json.loads(request.raw_post_data)
+        data = json.loads(request.read())
     except ValueError:
         return HttpResponseBadRequest('Invalid JSON')
 

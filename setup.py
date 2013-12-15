@@ -22,7 +22,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires = [
-        "django<=1.5",
-        "django-celery==3.1.1",
+        "django >= 1.3",
+        "django-celery >= 3",
     ],
 )
