@@ -104,7 +104,9 @@ with pass_blacklist:
     msg.send()
 ```
 
-or in some situations, you don't want the email to send through celery, you can use `no_delay`, for example.
+or in some situations, you don't want the email to send through Celery queue, you can use `no_delay`, for example.
+
+> since version 0.9
 
 ```python
 from djcelery_ses.utils import no_delay
@@ -113,3 +115,5 @@ from django.core.mail import send_mail
 with no_delay:
     send_mail('title', 'body content', 'noreply@example.com', ['noreply@example.com'])
 ```
+
+with `no_delay` your email will send out directly without Celey queue.
