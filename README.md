@@ -88,13 +88,28 @@ How to use
 
 All you have to do is use `send_mail` or `EmailMessage` just like the old time, you don't have to change your code.
 
+
+
+Utilities
+==============
+
 This package handle Blacklist for you by default, but sometimes, maybe you want to bypass the "blacklist check", you can use `pass_blacklist` to pass the "backlist check" like this.
 
 ```python
 from djcelery_ses.utils import pass_blacklist
+from django.core.mail import EmailMessage
 
 with pass_blacklist:
     msg = EmailMessage('title', 'body content', 'noreply@example.com', ['noreply@example.com'])
     msg.send()
 ```
 
+or in some situations, you don't want the email to send through celery, you can use `no_delay`, for example.
+
+```python
+from djcelery_ses.utils import no_delay
+from django.core.mail import send_mail
+
+with no_delay:
+    send_mail('title', 'body content', 'noreply@example.com', ['noreply@example.com'])
+```
