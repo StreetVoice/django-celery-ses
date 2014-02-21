@@ -6,7 +6,7 @@ from django.core.mail import EmailMessage
 from django.test.utils import override_settings
 
 from .models import Blacklist
-from .utils import pass_blacklist
+from .utils import pass_blacklist, no_delay
 
 
 @override_settings(
@@ -40,9 +40,15 @@ class DjcelerySESTest(TestCase):
             msg = EmailMessage('title', 'body content', 'noreply@example.com', ['noreply@example.com'])
             msg.send()
 
-        # should be no email in outbox
+        # should be one email in outbox
         self.assertEqual(len(mail.outbox), 1)
 
+    def test_no_delay(self):
+        with no_delay: 
+            msg = EmailMessage('title', 'body content', 'noreply@example.com', ['noreply@example.com'])
+            msg.send()
+            
+        self.assertEqual(len(mail.outbox), 1)
 
 class SNSNotificationTest(TestCase):
     urls = 'djcelery_ses.urls'
