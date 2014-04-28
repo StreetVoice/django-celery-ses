@@ -11,7 +11,7 @@ setup(
     url='http://github.com/StreetVoice/django-celery-ses',
     license='MIT',
     test_suite='runtests.runtests',
-    packages=['djcelery_ses',],
+    packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     install_requires = [
