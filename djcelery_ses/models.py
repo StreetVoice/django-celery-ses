@@ -22,12 +22,12 @@ RESULT_CODES = (
 
 class MessageLogManager(models.Manager):
     def log(self, message, result_code):
-        self.create(email=message.to[0], body=message.message(), result=result_code)
+        self.create(email=message.to[0], subject=message.subject, result=result_code)
         
 
 class MessageLog(models.Model):
     email = models.EmailField()
-    body = models.TextField()
+    subject = models.CharField(max_length=255)
     result = models.CharField(max_length=1, choices=RESULT_CODES)
     created_at = models.DateTimeField(auto_now_add=True)
 
