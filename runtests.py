@@ -4,7 +4,7 @@ import sys
 from os.path import dirname, abspath
 
 from django.conf import settings
-
+import django
 
 settings.configure(
     DATABASES = {
@@ -13,6 +13,7 @@ settings.configure(
             'NAME': ':memory:'
         }
     },
+    MIDDLEWARE_CLASSES=[],
     INSTALLED_APPS=[
         'django.contrib.admin',
         'django.contrib.auth',
@@ -33,6 +34,7 @@ settings.configure(
 
 def runtests(**test_args):
     from django.test.utils import get_runner
+    django.setup()
 
     parent = dirname(abspath(__file__))
     sys.path.insert(0, parent)
