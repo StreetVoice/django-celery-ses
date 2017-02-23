@@ -61,7 +61,7 @@ Installation
       ...
   )
   ```
-  
+
 
 Configuration
 ===============
@@ -79,7 +79,7 @@ SERVER_EMAIL = 'StreetVoice <noreply@streetvoice.com>'
 DEFAULT_FROM_EMAIL = 'StreetVoice <noreply@streetvoice.com>'
 ```
 
-Besides these settings, you also have to setting the SES / SNS on AWS to make this package handle bounce mail for you. 
+Besides these settings, you also have to setting the SES / SNS on AWS to make this package handle bounce mail for you.
 
 
 How to use
@@ -116,3 +116,12 @@ with no_delay:
 ```
 
 with `no_delay` your email will send out directly without Celey queue.
+
+
+Test
+==============
+In order to ensure your changed which can pass in local environment, please run the script:
+
+```
+make test
+```
