@@ -47,7 +47,7 @@ def send_email(message, **kwargs):
         logger.debug("Successfully sent email message to %r.", message.to)
         MessageLog.objects.log(message, 1)
         return result
-    except SMTPDataError, e:
+    except SMTPDataError as e:
         logger.warning("Message to %r, blacklisted.", message.to)
         if e.smtp_code == 554:
             MessageLog.objects.log(message, 3)
@@ -55,7 +55,7 @@ def send_email(message, **kwargs):
                 Blacklist(email=message.to[0]).save()
             except IntegrityError:
                 pass
-    except Exception, e:
+    except Exception as e:
         MessageLog.objects.log(message, 2)
         logger.warning("Failed to send email message to %r, retrying.", message.to)
         send_email.retry(exc=e)
