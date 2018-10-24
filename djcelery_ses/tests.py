@@ -66,7 +66,7 @@ class SNSNotificationTest(TestCase):
 
     def test_error_notification(self):
         resp = self.client.post('/sns_notification/', 'hello', content_type="application/json")
-        self.assertEqual(resp.content, 'Invalid JSON')
+        self.assertEqual(resp.content.decode(), 'Invalid JSON')
         self.assertEqual(resp.status_code, 400)
 
 

@@ -2,7 +2,8 @@
 *.pyc
 /dist
 /build
-*.egg
+.tox
+*.eggs
 *.egg-info
 *.sqlite3
 .coverage
