@@ -2,7 +2,7 @@
 import django
 
 
-if django.get_version() >= '1.9':
+if django.VERSION >= (1, 9):
     from django.conf.urls import url
     from djcelery_ses import views
 
