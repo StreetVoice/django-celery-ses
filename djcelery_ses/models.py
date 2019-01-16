@@ -22,7 +22,8 @@ RESULT_CODES = (
 
 class MessageLogManager(models.Manager):
     def log(self, message, result_code):
-        self.create(email=message.to[0], subject=message.subject, result=result_code)
+        subject = message.subject[:255] + '...' if len(message.subject) > 255 else message.subject
+        self.create(email=message.to[0], subject=subject, result=result_code)
         
 
 class MessageLog(models.Model):
