@@ -1,9 +1,12 @@
 # coding: utf-8
 import json
+import re
 
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import mail_admins
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 from .models import Blacklist
 
@@ -41,6 +44,16 @@ def sns_notification(request):
     type = 0 if message['notificationType'] == 'Bounce' else 1
     email = message['mail']['destination'][0]
 
+    try:
+        validate_email(email)
+    except ValidationError:
+        try:
+            email = re.findall(r"<(.+?)>", email)[0]
+        except IndexError:
+            email = None
+
+    if not email:
+        return HttpResponse('Email Error')
 
     # add email to blacklist
     try:
