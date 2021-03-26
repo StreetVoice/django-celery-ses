@@ -10,7 +10,7 @@ class Blacklist(models.Model):
     type = models.PositiveSmallIntegerField(default=0, choices=TYPE_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.email
 
 
