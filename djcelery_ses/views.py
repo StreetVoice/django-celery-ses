@@ -56,9 +56,6 @@ def sns_notification(request):
         return HttpResponse('Email Error')
 
     # add email to blacklist
-    try:
-        Blacklist.objects.get(email=email)
-    except Blacklist.DoesNotExist:
-        Blacklist.objects.create(email=email, type=type)
+    Blacklist.objects.get_or_create(email=email, defaults={"type": type})
 
     return HttpResponse('Done')
