@@ -1,7 +1,8 @@
-from django.core.mail.backends.base import BaseEmailBackend
+# -*- coding: utf-8 -*-
 from django.conf import settings
+from django.core.mail.backends.base import BaseEmailBackend
 
-from .tasks import send_email
+from .tasks import send_emails
 
 
 class CeleryEmailBackend(BaseEmailBackend):
@@ -10,13 +11,14 @@ class CeleryEmailBackend(BaseEmailBackend):
         self.init_kwargs = kwargs
 
     def send_messages(self, email_messages, **kwargs):
-        results = []
-        kwargs['_backend_init_kwargs'] = self.init_kwargs
-        for msg in email_messages:
-            NO_DELAY = getattr(settings, 'DJCELERY_SES_NO_DELAY', False)
-            if NO_DELAY:
-                result = send_email(msg, **kwargs)
-            else:
-                result = send_email.delay(msg, **kwargs)
-            results.append(result)
-        return results
+        if not email_messages:
+            return 0
+
+        kwargs["_backend_init_kwargs"] = self.init_kwargs
+
+        NO_DELAY = getattr(settings, "DJCELERY_SES_NO_DELAY", False)
+        if NO_DELAY:
+            send_emails(email_messages, **kwargs)
+        else:
+            send_emails.delay(email_messages, **kwargs)
+        return len(email_messages)
