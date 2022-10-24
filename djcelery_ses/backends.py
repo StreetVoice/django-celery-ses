@@ -19,13 +19,8 @@ class CeleryEmailBackend(BaseEmailBackend):
         NO_DELAY = getattr(settings, "DJCELERY_SES_NO_DELAY", False)
         CHUNK_SIZE = getattr(settings, "DJCELERY_SES_CHUNK_SIZE", 50)
 
-        pages, remainder = divmod(len(email_messages), CHUNK_SIZE)
-        if remainder != 0:
-            pages += 1
-
-        for page in range(pages):
-            offset = CHUNK_SIZE * page
-            email_messages_chunk = email_messages[offset: offset + CHUNK_SIZE]
+        for index in range(0, len(email_messages), CHUNK_SIZE):
+            email_messages_chunk = email_messages[index: index + CHUNK_SIZE]
 
             if NO_DELAY:
                 send_emails(email_messages_chunk, **kwargs)
