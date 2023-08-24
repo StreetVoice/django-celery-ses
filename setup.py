@@ -15,7 +15,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        "django >= 1.10, <= 2.2.28",
+        "django >= 1.10, <= 3.0.14",
         "django-celery >= 3",
     ],
     classifiers=[
