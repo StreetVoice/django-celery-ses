@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db import IntegrityError
 from django.core.mail import get_connection
 
-from celery.task import task
+from celery import shared_task
 
 from .models import Blacklist, MessageLog
 
@@ -20,7 +20,7 @@ TASK_CONFIG = {
 TASK_CONFIG.update(CONFIG)
 
 
-@task(**TASK_CONFIG)
+@shared_task(**TASK_CONFIG)
 def send_emails(messages, **kwargs):
     """
     send mails task
