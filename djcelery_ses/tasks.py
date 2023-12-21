@@ -5,8 +5,11 @@ from django.db import IntegrityError
 from django.core.mail import get_connection
 
 from celery import shared_task
+from celery.utils.log import get_task_logger
 
 from .models import Blacklist, MessageLog
+
+logger = get_task_logger(__name__)
 
 
 CONFIG = getattr(settings, 'CELERY_EMAIL_TASK_CONFIG', {})
@@ -25,7 +28,6 @@ def send_emails(messages, **kwargs):
     """
     send mails task
     """
-    logger = send_emails.get_logger()
     conn = get_connection(backend=BACKEND)
     conn.open()
 
