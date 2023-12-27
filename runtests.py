@@ -13,21 +13,36 @@ settings.configure(
             'NAME': ':memory:'
         }
     },
-    MIDDLEWARE_CLASSES=[],
+    MIDDLEWARE=(
+        "django.contrib.sessions.middleware.SessionMiddleware",
+        "django.contrib.auth.middleware.AuthenticationMiddleware",
+        "django.contrib.messages.middleware.MessageMiddleware",
+    ),
+    TEMPLATES=[
+        {
+            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "OPTIONS": {
+                "context_processors": [
+                    "django.contrib.auth.context_processors.auth",
+                    "django.contrib.messages.context_processors.messages",
+                ],
+            }
+        }
+    ],
     INSTALLED_APPS=[
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'django.contrib.sites',
-        'djcelery',
+        "django.contrib.messages",
         'djcelery_ses',
     ],
     SITE_ID=1,
     DEBUG=False,
     ROOT_URLCONF='djcelery_ses.urls',
     CELERY_EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend',
-    TEST_RUNNER='djcelery.contrib.test_runner.CeleryTestSuiteRunner',
+    TEST_RUNNER='djcelery_ses.test_runner.CeleryTestSuiteRunner',
 )
 
 
