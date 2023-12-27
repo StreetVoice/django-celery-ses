@@ -34,5 +34,5 @@ class MessageLog(models.Model):
 
     objects = MessageLogManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.email
