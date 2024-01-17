@@ -43,6 +43,7 @@ settings.configure(
     ROOT_URLCONF='djcelery_ses.urls',
     CELERY_EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend',
     TEST_RUNNER='djcelery_ses.test_runner.CeleryTestSuiteRunner',
+    SECRET_KEY='secret',
 )
 
 
