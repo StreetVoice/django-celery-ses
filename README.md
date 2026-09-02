@@ -115,7 +115,7 @@ with no_delay:
     send_mail('title', 'body content', 'noreply@example.com', ['noreply@example.com'])
 ```
 
-with `no_delay` your email will send out directly without Celey queue.
+with `no_delay` your email will send out directly without Celery queue.
 
 
 Test
