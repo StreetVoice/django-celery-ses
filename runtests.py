@@ -57,9 +57,9 @@ def runtests(**test_args):
 
     TestRunner = get_runner(settings)
     test_runner = TestRunner(verbosity=1, interactive=True)
-    failures = test_runner.run_tests(['djcelery_ses'], test_args)
+    failures = test_runner.run_tests(['djcelery_ses'], **test_args)
     sys.exit(failures)
 
 
 if __name__ == '__main__':
-    runtests(*sys.argv[1:])
+    runtests()
